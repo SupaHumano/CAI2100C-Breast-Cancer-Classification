@@ -8,6 +8,6 @@ This notebook completes the guided six-stage student worksheet supplied in the M
 
 **Project format:** Individual work by Juan Luna Santibanez with Professor Beth Muturi's approval.
 
-**Before Canvas submission:** Confirm student identification, use Google Colab, upload the course CSV if requested, choose Runtime > Run all, then share the notebook URL and check the Canvas submission receipt.
+**Execution:** Open the notebook in Google Colab, load the accompanying course CSV if requested, and select Runtime > Run all. The notebook contains executed results and the six-stage classroom workflow.
 
 The original uploaded course ZIP and earlier notebook versions were preserved separately. The expanded research notebook is not the graded submission.

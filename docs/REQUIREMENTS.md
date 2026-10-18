@@ -16,7 +16,7 @@ The six-stage organization below comes from the instructor-provided notebook and
 | 5. Evaluation | Scores, confusion matrices, class metrics and best-model conclusion | Three model evaluations plus model ranking |
 | 6. Deployment | Explain a suitable method to deploy | Responsible instructional deployment plan |
 
-## Submission checklist
+## Reproducibility and Delivery
 
 - Open the required **course notebook**, not the extended R&D notebook.
 - Confirm Juan Luna Santibanez is identified as the individual student in the notebook.
@@ -25,4 +25,4 @@ The six-stage organization below comes from the instructor-provided notebook and
 - Submit the *actual* Colab notebook URL to Canvas and verify the submission receipt.
 - Check Canvas for any changed deadline or extra rubric instructions.
 
-The archive and transcript do not contain a complete signed Canvas point rubric. Do not interpret this mapping as confirmation of an unseen grading breakdown.
+The course notebook follows the documented six-stage workflow. Any additional evaluation criteria should be checked against the current course instructions.

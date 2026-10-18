@@ -24,7 +24,7 @@
 
 ---
 
-[Overview](#overview) · [Course assignment](#the-course-assignment) · [Workflow](#the-learning-workflow) · [Results](#model-results) · [Interpretation](#what-does-99-actually-mean) · [Run](#run-the-project) · [Structure](#project-structure) · [Sources](#sources-and-context)
+[**Oral Presentation & Q&A**](docs/PRESENTATION_GUIDE.md) · [Overview](#overview) · [Course assignment](#the-course-assignment) · [Workflow](#the-learning-workflow) · [Results](#model-results) · [Interpretation](#what-does-99-actually-mean) · [Run](#run-the-project) · [Structure](#project-structure) · [Sources](#sources-and-context)
 
 ## Overview
 
@@ -45,7 +45,7 @@ Professor Beth Muturi provided an instructor-guided Jupyter Notebook with six st
 | Evaluation | Report test scores, confusion matrices and classification metrics |
 | Deployment | Explain where and how a model could be used with adequate safeguards |
 
-**Project format:** Individual work by Juan Luna Santibanez, as approved by Professor Beth Muturi. The course deadline stated in class was **Friday, October 30, 2026, at 11:00 PM**. Confirm any updated date in Canvas.
+**Project format:** Individual work by Juan Luna Santibanez, as approved by Professor Beth Muturi. The course deadline stated in class was **Friday, October 30, 2026, at 11:00 PM**. 
 
 ## The Learning Workflow
 
@@ -95,7 +95,11 @@ SVM classified **108 of the 109** cases in one classroom test partition correctl
 
 The more demanding nested estimate, **97.93%**, is lower, and additional preprocessing experiments showed both positive and negative results. I therefore select SVM as the strongest of the three required candidates in this coursework while keeping its limitations visible.
 
-The research appendix also compares optional logistic regression and random forest baselines. Those methods are **not additional requirements from the professor** and remain separate from the graded three-model comparison.
+The research appendix also compares optional logistic regression and random forest baselines. Those methods are supplementary research experiments and remain separate from the main three-model comparison.
+
+## Oral Presentation and Technical Q&A
+
+My [**oral presentation and technical Q&A**](docs/PRESENTATION_GUIDE.md) covers the problem, proposed solution, data preparation, methods, model comparison, confusion matrices, cross-validation, limitations, deployment design and 45 questions with detailed answers.
 
 ## Interactive Lab
 

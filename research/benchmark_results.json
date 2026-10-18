@@ -1,0 +1,128 @@
+[
+  {
+    "model": "KNN",
+    "cv_mean_accuracy": 0.9608393477679765,
+    "cv_sd_accuracy": 0.005567459489241358,
+    "cv_fold_accuracies": [
+      0.9540229885057471,
+      0.9655172413793104,
+      0.9540229885057471,
+      0.9655172413793104,
+      0.9651162790697675
+    ],
+    "cv_mean_recall": 0.9128787878787878,
+    "cv_mean_f1": 0.9451727965318657,
+    "train_accuracy": 0.9700460829493087,
+    "historic_holdout_accuracy": 0.9724770642201835,
+    "holdout_fn": 3,
+    "holdout_fp": 0,
+    "holdout_recall": 0.925,
+    "best_params": {
+      "model__n_neighbors": 7,
+      "model__weights": "uniform"
+    },
+    "dev_grid_score": 0.963154533844189,
+    "runtime_sec": 1.9
+  },
+  {
+    "model": "SVM",
+    "cv_mean_accuracy": 0.9815824645816627,
+    "cv_sd_accuracy": 0.005598432009226777,
+    "cv_fold_accuracies": [
+      0.9770114942528736,
+      0.9885057471264368,
+      0.9770114942528736,
+      0.9770114942528736,
+      0.9883720930232558
+    ],
+    "cv_mean_recall": 0.9626893939393939,
+    "cv_mean_f1": 0.9747846418814161,
+    "train_accuracy": 0.9861751152073732,
+    "historic_holdout_accuracy": 0.9908256880733946,
+    "holdout_fn": 1,
+    "holdout_fp": 0,
+    "holdout_recall": 0.975,
+    "best_params": {
+      "model__C": 0.1,
+      "model__gamma": "scale",
+      "model__kernel": "linear"
+    },
+    "dev_grid_score": 0.9723818646232439,
+    "runtime_sec": 0.1
+  },
+  {
+    "model": "Decision Tree",
+    "cv_mean_accuracy": 0.9400962309542903,
+    "cv_sd_accuracy": 0.023432183090750628,
+    "cv_fold_accuracies": [
+      0.896551724137931,
+      0.9425287356321839,
+      0.9540229885057471,
+      0.9655172413793104,
+      0.9418604651162791
+    ],
+    "cv_mean_recall": 0.9128787878787878,
+    "cv_mean_f1": 0.9196029091681266,
+    "train_accuracy": 0.9631336405529954,
+    "historic_holdout_accuracy": 0.908256880733945,
+    "holdout_fn": 9,
+    "holdout_fp": 1,
+    "holdout_recall": 0.775,
+    "best_params": {
+      "model__criterion": "gini",
+      "model__max_depth": 2,
+      "model__min_samples_leaf": 1
+    },
+    "dev_grid_score": 0.9561941251596423,
+    "runtime_sec": 0.3
+  },
+  {
+    "model": "Logistic Regression (extension)",
+    "cv_mean_accuracy": 0.9723603314621758,
+    "cv_sd_accuracy": 0.01170138429313246,
+    "cv_fold_accuracies": [
+      0.9655172413793104,
+      0.9770114942528736,
+      0.9540229885057471,
+      0.9885057471264368,
+      0.9767441860465116
+    ],
+    "cv_mean_recall": 0.9314393939393939,
+    "cv_mean_f1": 0.9610520651127473,
+    "train_accuracy": 0.9815668202764977,
+    "historic_holdout_accuracy": 0.981651376146789,
+    "holdout_fn": 2,
+    "holdout_fp": 0,
+    "holdout_recall": 0.95,
+    "best_params": {
+      "model__C": 0.1
+    },
+    "dev_grid_score": 0.9723978288633462,
+    "runtime_sec": 0.1
+  },
+  {
+    "model": "Random Forest (extension)",
+    "cv_mean_accuracy": 0.9562416466185513,
+    "cv_sd_accuracy": 0.030300018965533283,
+    "cv_fold_accuracies": [
+      0.896551724137931,
+      0.9770114942528736,
+      0.9655172413793104,
+      0.9770114942528736,
+      0.9651162790697675
+    ],
+    "cv_mean_recall": 0.937689393939394,
+    "cv_mean_f1": 0.941463847200023,
+    "train_accuracy": 1.0,
+    "historic_holdout_accuracy": 0.926605504587156,
+    "holdout_fn": 6,
+    "holdout_fp": 2,
+    "holdout_recall": 0.85,
+    "best_params": {
+      "model__max_depth": null,
+      "model__min_samples_leaf": 1
+    },
+    "dev_grid_score": 0.9585249042145594,
+    "runtime_sec": 1.0
+  }
+]

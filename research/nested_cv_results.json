@@ -1,0 +1,44 @@
+[
+  {
+    "model": "KNN",
+    "outer_accuracy_folds": [
+      0.9174311926605505,
+      0.9541284403669725,
+      0.9629629629629629,
+      0.9814814814814815
+    ],
+    "nested_mean_accuracy": 0.9540010193679919,
+    "nested_std_accuracy": 0.023306976919442248,
+    "nested_malignant_recall": 0.9068597560975611,
+    "nested_f1": 0.9357256667383249,
+    "seconds": 0.3
+  },
+  {
+    "model": "SVM",
+    "outer_accuracy_folds": [
+      0.981651376146789,
+      0.9724770642201835,
+      0.9814814814814815,
+      0.9814814814814815
+    ],
+    "nested_mean_accuracy": 0.9792728508324838,
+    "nested_std_accuracy": 0.003924162236646637,
+    "nested_malignant_recall": 0.9504573170731707,
+    "nested_f1": 0.9714358162934112,
+    "seconds": 0.4
+  },
+  {
+    "model": "Decision Tree",
+    "outer_accuracy_folds": [
+      0.963302752293578,
+      0.9357798165137615,
+      0.9537037037037037,
+      0.9814814814814815
+    ],
+    "nested_mean_accuracy": 0.9585669384981311,
+    "nested_std_accuracy": 0.01651066468556935,
+    "nested_malignant_recall": 0.9256097560975611,
+    "nested_f1": 0.9433415076874992,
+    "seconds": 0.8
+  }
+]

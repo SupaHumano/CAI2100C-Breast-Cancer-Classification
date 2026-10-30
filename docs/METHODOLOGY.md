@@ -1,35 +1,46 @@
-# Experimental Design and Reproducibility
+# My Experimental Design and Reproducibility
 
-## Data and target semantics
+**Juan Luna Santibanez** · Miami Dade College · CAI2100C · Professor Beth Muturi
 
-The instructor modified the Wisconsin Diagnostic Breast Cancer CSV. The labels `B` and `M` denote benign and malignant breast mass samples. They do not encode invasive and in-situ stages. The initial dataset has 569 records and 32 columns. There are 28 missing cells distributed across 26 rows. The course uses complete-case deletion and continues with 543 rows, 342 benign and 201 malignant.
+## My data and target
 
-## Classroom baseline
+I use the instructor-modified Wisconsin Diagnostic Breast Cancer CSV, without substituting the unmodified online dataset. I interpret `B` as **benign** and `M` as **malignant** breast mass samples; these are not labels for invasive versus in-situ stages.
 
-The course notebook reproduces the instructor's six-stage teaching sequence and three required algorithms. Its features follow the source classroom template, which includes administrative `id` as a numeric input. A seeded stratified 20% holdout contains 109 rows and a training partition contains 434 rows. Numeric features are scaled using the training data, and the same scaler transforms the holdout. The Decision Tree is fitted without scaling.
+I start with **569 records and 32 columns**. I find **28 missing cells across 26 records**. Following the course notebook's complete-case approach, I retain **543 records**: **342 benign** and **201 malignant**.
 
-Because an ID number is not a biological measurement, the **research notebook separately excludes `id`**. This is an important methodological caveat. The two experiments must not be described as if they have exactly identical input specifications.
+## My required classroom baseline
 
-## Research-only evaluation
+I keep the **six original teaching stages** and train the **three required models: KNN, SVM and Decision Tree**. I preserve the instructor's classroom input specification, including the administrative `id` column, to maintain consistency with that teaching baseline. I do not treat `id` as a biological measurement.
 
-The research notebook builds pipelines that fit preprocessing **inside training folds** and evaluates KNN, SVM and Decision Tree using nested cross-validation on the development partition. Its four outer folds produce mean accuracies of 95.40%, 97.93% and 95.86%, respectively. Auxiliary five-fold comparisons, logistic regression, random forest, SVM feature-processing experiments and stability checks are optional research extensions. They do not replace the instructor's required three-model exercise.
+I create a seeded, stratified 80/20 split: **434 development records** and **109 held-out test records**. I fit the scaler only on the training data and use it to transform the test data. I train the Decision Tree on the unscaled numeric features. I compare the models using the same test records, class-level metrics and confusion matrices.
 
-The initial 109-row holdout had already been examined. Repeating model selection against those observations would increase the risk of optimistic reporting. Consequently, the 99.08% SVM holdout accuracy must never be presented as a fresh or independently generalizable prediction performance estimate.
+| My classroom model | Held-out accuracy | Missed malignant samples |
+|---|---:|---:|
+| KNN | 95.41% | 5 |
+| SVM | **99.08%** | **1** |
+| Decision Tree | 92.66% | 4 |
 
-## Scientific quality controls
+I select **SVM** as the strongest of these three classroom baselines on the documented split. I do not interpret its 99.08% as a clinical performance guarantee.
 
-- B means **benign**, and M means **malignant**.
-- A false negative is a malignant sample that is predicted benign.
-- `id` is excluded from the preferred research specification.
-- Scaling, feature selection and hyperparameter fitting must remain inside training folds.
-- Report negative or weaker outcomes alongside the strongest result.
-- Avoid converting a favorable accuracy into a medical or clinical safety claim.
-- Compare outcomes from the same experimental protocol, not from unrelated datasets.
+## My separate research evaluation
 
-## Data provenance
+In my optional research notebook, I remove the non-clinical `id` and fit preprocessing and hyperparameters **inside training folds**. I run nested cross-validation on the development partition and obtain mean accuracies of **95.40% (KNN)**, **97.93% (SVM)** and **95.86% (Decision Tree)**. I also document optional logistic regression, random forest, feature-processing tests and stability checks.
 
-The CSV is retained byte-for-byte from the instructor's Project 1 Dependencies archive. The SHA-256 checksum is written in `data/SHA256.txt`. Reproducing the same split with a different dataset can change all model results.
+I had already examined the original 109-case holdout when preparing the classroom baseline. I therefore avoid selecting or repeatedly tuning a research model on those held-out cases; I report the holdout and development-only experiments separately.
 
-## Deployment boundary
+## My scientific quality controls
 
-A responsible educational prototype could provide measured-feature entry, consistent preprocessing, model-version tracking, drift checks, access controls and clear limitations. Real clinical deployment is **not demonstrated or approved**. Independent patient cohorts, clinical validation, privacy protections and applicable regulatory review would be necessary before medical use.
+- I use the original dataset's `B` (benign) and `M` (malignant) labels, with `M` as the positive class.
+- I count a false negative when the model predicts benign for an observed malignant sample.
+- I keep `id` in the classroom baseline for fidelity to the worksheet, but exclude it from the research specification.
+- I fit preprocessing, feature selection and hyperparameters on training folds, not on their validation folds.
+- I disclose weaker results alongside stronger ones and compare only equivalent evaluation protocols.
+- I make no medical diagnosis, screening or clinical-safety claim.
+
+## My data provenance
+
+I retain the instructor-provided CSV byte-for-byte in the repository. I record its SHA-256 checksum in `data/SHA256.txt`. Using another version of the dataset may change the cleaning results, splits and reported model scores.
+
+## My proposed deployment boundary
+
+I propose an **educational, access-controlled demonstration**, with validated inputs, the saved preprocessing pipeline, model-version tracking, monitoring for distribution drift and clear limitations. I have not clinically validated or approved this application. Any real medical use would require independent patient-cohort validation, clinical oversight, privacy protection and applicable regulatory review.

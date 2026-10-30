@@ -28,13 +28,13 @@
 
 ## Overview
 
-This academic project compares **K-Nearest Neighbors (KNN)**, **Support Vector Machine (SVM)** and **Decision Tree** for classifying labeled breast mass observations using measurements from the Wisconsin Diagnostic Breast Cancer data provided in class. The available labels are **B (benign)** and **M (malignant)**. This dataset does not directly label invasive versus non-invasive disease.
+In this project, I compare **K-Nearest Neighbors (KNN)**, **Support Vector Machine (SVM)** and **Decision Tree** for classifying labeled breast mass observations using measurements from the Wisconsin Diagnostic Breast Cancer data provided in class. The available labels are **B (benign)** and **M (malignant)**. This dataset does not directly label invasive versus non-invasive disease.
 
-The goal is to build and compare three reproducible supervised classifiers, explain how the results are measured, and propose a responsible deployment approach. **This is an educational exercise, not a tool for medical diagnosis or screening.**
+My goal is to build and compare three reproducible supervised classifiers, explain how the results are measured, and propose a responsible deployment approach. **This is an educational exercise, not a tool for medical diagnosis or screening.**
 
 ## The Course Assignment
 
-Professor Beth Muturi provided an instructor-guided Jupyter Notebook with six stages of the AI Project Cycle. The assignment asks for all three algorithms, an evaluation of their classification performance, a reasoned best-model decision, and a deployment proposal.
+I follow the instructor-guided Jupyter Notebook provided by Professor Beth Muturi, preserving its six stages of the AI Project Cycle. The assignment asks for all three algorithms, an evaluation of their classification performance, a reasoned best-model decision, and a deployment proposal.
 
 | Course stage | Working output |
 |---|---|
@@ -45,7 +45,7 @@ Professor Beth Muturi provided an instructor-guided Jupyter Notebook with six st
 | Evaluation | Report test scores, confusion matrices and classification metrics |
 | Deployment | Explain where and how a model could be used with adequate safeguards |
 
-**Project format:** Individual work by Juan Luna Santibanez, as approved by Professor Beth Muturi. The course deadline stated in class was **Friday, October 30, 2026, at 11:00 PM**. 
+**Project format:** I completed this project individually with Professor Beth Muturi's approval. The course deadline stated in class was **Friday, October 30, 2026, at 11:00 PM**. 
 
 ## The Learning Workflow
 
@@ -53,11 +53,11 @@ Professor Beth Muturi provided an instructor-guided Jupyter Notebook with six st
 
 ### What the source data contains
 
-The course-provided file has **569 observations** and **32 columns**, including the administrative `id` column and the binary `diagnosis` target. There are **28 missing data cells** affecting **26 rows**. Following the classroom notebook's selected approach, complete-case cleaning leaves **543 observations**: 342 benign and 201 malignant.
+I use the course-provided file containing **569 observations** and **32 columns**, including the administrative `id` column and the binary `diagnosis` target. There are **28 missing data cells** affecting **26 rows**. Following the classroom notebook's selected approach, I remove incomplete rows and retain **543 observations**: 342 benign and 201 malignant.
 
 ![Observed record counts before and after cleanup](assets/dataset-integrity.svg)
 
-The classroom baseline deliberately follows the provided instructional template. Separate research experiments exclude the non-clinical `id` and use preprocessing pipelines to protect held-out data against leakage. **Do not confuse the classroom baseline with the additional research evaluation.**
+In my classroom baseline, I deliberately follow the provided instructional template. In my separate research notebook, I exclude the non-clinical `id` and use preprocessing pipelines to protect held-out data against leakage. **I keep my classroom baseline separate from my additional research evaluation.**
 
 ## Model Results
 
@@ -73,7 +73,7 @@ The classroom baseline deliberately follows the provided instructional template.
 
 ![Classroom confusion matrices](assets/confusion-matrices.svg)
 
-The confusion matrix separates actual labels (rows) from predicted labels (columns). A **false negative** is a malignant sample predicted as benign. On the fixed classroom split, SVM had one such error.
+I read each confusion matrix with actual labels in rows and predicted labels in columns. A **false negative** is a malignant sample predicted as benign. On my fixed classroom split, SVM had one such error.
 
 ![Missed malignant cases](assets/malignant-false-negatives.svg)
 
@@ -87,15 +87,15 @@ The confusion matrix separates actual labels (rows) from predicted labels (colum
 | **SVM** | **97.93%** |
 | Decision Tree | 95.86% |
 
-These estimates are based on nested validation within the **434 development observations**. The original 109-case test set was already examined and therefore cannot be described as fresh external validation. The nested procedure tests hyperparameter selection in separate development folds.
+I obtained these estimates through nested validation within the **434 development observations**. I had already examined the original 109-case test set, so I do not describe it as fresh external validation. I use separate development folds to test hyperparameter selection in my nested procedure.
 
 ## What Does 99% Actually Mean?
 
-SVM classified **108 of the 109** cases in one classroom test partition correctly. That result is real for the specified test. It does **not** mean SVM will always achieve 99% on new patients or in clinical use.
+My SVM model classified **108 of the 109** cases in the classroom test partition correctly. I report this result for that specific test; I do **not** claim SVM will always achieve 99% on new patients or in clinical use.
 
 The more demanding nested estimate, **97.93%**, is lower, and additional preprocessing experiments showed both positive and negative results. I therefore select SVM as the strongest of the three required candidates in this coursework while keeping its limitations visible.
 
-The research appendix also compares optional logistic regression and random forest baselines. Those methods are supplementary research experiments and remain separate from the main three-model comparison.
+In my research appendix, I also compare optional logistic regression and random forest baselines. Those methods are supplementary research experiments and remain separate from the main three-model comparison.
 
 ## Oral Presentation and Technical Q&A
 
@@ -103,7 +103,7 @@ My [**oral presentation and technical Q&A**](docs/PRESENTATION_GUIDE.md) covers 
 
 ## Interactive Lab
 
-The [interactive visualization](https://supahumano.github.io/CAI2100C-Breast-Cancer-Classification/) allows readers to examine each of the three required models, understand confusion-matrix cells, compare false negatives and view the difference between the classroom holdout and nested validation. It visualizes existing, reproducible results. **It is not a medical classifier and does not accept patient data.**
+In my [interactive visualization](https://supahumano.github.io/CAI2100C-Breast-Cancer-Classification/), I show the three required models, confusion matrices, false negatives and the difference between the classroom holdout and nested validation. I visualize my existing, reproducible results. **It is not a medical classifier and does not accept patient data.**
 
 ## Run the Project
 
@@ -126,7 +126,7 @@ python -m pip install -r requirements.txt
 jupyter notebook academic/Project_1_Course_Submission.ipynb
 ```
 
-The CSV is stored beside the course notebook so the original loader can find it locally.
+I keep the original CSV beside my course notebook so its loader can find it locally.
 
 ## Project Structure
 
@@ -153,7 +153,7 @@ CAI2100C-Breast-Cancer-Classification/
 
 ## Sources and Context
 
-The classroom notebook was completed using the **MDC instructor-provided template** and CSV. The separate research notebook documents optional methodology, including nested CV and feature-processing comparisons. Public reference implementations were used for conceptual comparison only, not copied into the code.
+I completed my classroom notebook using the **MDC instructor-provided template** and CSV. In my separate research notebook, I document optional methodology, including nested CV and feature-processing comparisons. I reviewed public reference implementations for conceptual comparison only; I did not copy their code.
 
 - Miami Dade College, CAI2100C Machine Learning Foundations. **Project 1: Practical Application of a Supervised Learning Model**, Professor Beth Muturi.
 - [scikit-learn: Common pitfalls and data leakage](https://scikit-learn.org/stable/common_pitfalls.html)

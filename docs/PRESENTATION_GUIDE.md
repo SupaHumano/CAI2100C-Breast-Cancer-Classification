@@ -223,7 +223,7 @@ I would use a versioned notebook and read-only interactive visualization, preser
 Independent clinical cohorts, prospective validation, privacy protection, subgroup error assessment, clinical oversight, monitoring, and applicable regulatory review.
 
 **Q45. How is the work reproducible?**  
-The repository preserves the original CSV and its SHA-256 checksum, implementation settings, executed notebooks, results files, dependency specifications, and the distinction between classroom and research experiments.
+In my repository, I preserve the original CSV and its SHA-256 checksum, implementation settings, executed notebooks, results files, dependency specifications, and the distinction between classroom and research experiments.
 
 ## 7. Closing Statement
 

@@ -85,145 +85,145 @@ Nested validation separates inner hyperparameter selection from four outer evalu
 ### Problem and data
 
 **Q01. What problem am I solving?**  
-I classify recorded breast mass measurements into the known dataset categories benign and malignant, then compare the reliability and errors of three learning algorithms.
+I classify recorded breast mass measurements as benign or malignant and compare the reliability and errors of three supervised algorithms.
 
 **Q02. Why is this supervised learning?**  
-Every training observation includes numerical inputs and a known diagnosis label. The algorithms learn the mapping between them.
+I use supervised learning because each training sample has numerical measurements and a known diagnosis label. I train the models to learn from these labeled examples.
 
 **Q03. What is the target variable?**  
-`diagnosis`, encoded as benign `B = 0` and malignant `M = 1`. I treat malignant as the positive class when computing recall and false negatives.
+I predict the original `diagnosis` column, which I encode as benign `B = 0` and malignant `M = 1`. I use malignant as the positive class for recall and false negatives.
 
 **Q04. Does malignant mean invasive breast cancer?**  
-No. The supplied labels are benign and malignant. They do not establish stage, invasive status, or a complete clinical diagnosis.
+No. I use the dataset's benign and malignant labels; I cannot infer invasive status, disease stage or a complete clinical diagnosis from them.
 
 **Q05. How much data did I start with?**  
-569 records and 32 columns, including 30 measurements, one identifier, and one diagnosis label.
+I start with 569 records and 32 columns: 30 measurements, one administrative identifier and one diagnosis label.
 
 **Q06. How much data remains after cleaning?**  
-543 observations: 342 benign and 201 malignant. Removing 26 incomplete rows reduced the record count from 569 to 543.
+After removing 26 incomplete rows, I retain 543 observations: 342 benign and 201 malignant.
 
 **Q07. Why were there 28 missing values but 26 removed rows?**  
-Missing cells and incomplete observations are different quantities; some rows contain more than one missing cell.
+I count 28 missing cells across 26 different rows because some rows contain more than one missing value.
 
 **Q08. Why did I remove incomplete rows instead of imputing?**  
-Complete-case deletion follows the classroom procedure and is reproducible. It also discards information. A separate imputation comparison would require fitting the imputer only on training folds.
+I remove incomplete rows to follow the classroom procedure and keep my baseline reproducible. I recognize that this discards information; if I test imputation separately, I must fit it on training folds only.
 
 **Q09. Is the dataset balanced?**  
-No. There are more benign than malignant observations. I therefore inspect class-level recall and the confusion matrix as well as accuracy.
+No. I have more benign than malignant observations, so I examine class-level recall and confusion matrices as well as accuracy.
 
 **Q10. What does the correlation heatmap show?**  
-It displays statistical relationships among measurements. Correlation indicates association, not causation or clinical significance.
+I use the correlation heatmap to inspect statistical relationships among measurements. I do not interpret correlation as causation or clinical significance.
 
 ### Algorithms and training
 
 **Q11. How is the data split?**  
-With a stratified 80/20 split and `random_state = 42`: 434 development observations and 109 held-out observations.
+I use a stratified 80/20 split with `random_state = 42`: 434 development observations and 109 held-out test observations.
 
 **Q12. Why stratify?**  
-Stratification approximately preserves the class proportions in the two partitions and reduces accidental class-distribution differences.
+I stratify the split to approximately preserve the benign/malignant proportions and reduce accidental differences in class distribution.
 
 **Q13. Why keep a test set?**  
-It provides a held-out evaluation separate from parameter fitting. Reusing it for model selection would weaken the independence of the estimate.
+I keep a test partition separate from model fitting so I can evaluate predictions on held-out data. I recognize that repeated test-based selection would weaken that estimate.
 
 **Q14. What is data leakage?**  
-Leakage occurs when information from evaluation data influences training or parameter choices, for example fitting a scaler before splitting the data.
+I understand data leakage as evaluation information influencing training or model selection. For example, I avoid fitting a scaler on all records before splitting.
 
 **Q15. Why use StandardScaler?**  
-KNN distances and SVM optimization are sensitive to numerical scale. I fit scaling parameters on the training partition, then transform the evaluation data.
+I use StandardScaler because distances in KNN and optimization in SVM depend on feature scale. I fit the scaler on training data and transform the held-out data with the same parameters.
 
 **Q16. How does KNN work?**  
-It assigns a label using nearby labeled examples in the feature space. The classroom model uses `n_neighbors = 2`.
+I use KNN to assign a class based on nearby labeled training examples. My classroom baseline has `n_neighbors = 2`.
 
 **Q17. How does SVM work?**  
-It learns a decision boundary that separates classes using a margin-based objective; observations close to the boundary influence the fitted classifier.
+I use SVM to learn a margin-based decision boundary between classes. I understand that observations near the boundary help determine the fitted classifier.
 
 **Q18. How does Decision Tree work?**  
-It recursively splits the feature space with decision rules. Deep or unrestricted splitting can overfit training patterns.
+I use a Decision Tree to learn successive feature-based splitting rules. I check for overfitting because unrestricted trees can fit training patterns too closely.
 
 **Q19. Why these three algorithms?**  
-They compare distance-based, margin-based, and rule-based approaches under the same classroom conditions.
+I compare these three algorithms because they represent distance-based, margin-based and rule-based approaches under the same classroom conditions.
 
 **Q20. What are hyperparameters?**  
-Settings selected before training, such as neighbor count, SVM regularization and kernel, or tree depth. They are different from parameters learned from training data.
+I understand hyperparameters as settings I choose before fitting, such as KNN neighbor count, SVM kernel and regularization, or tree depth. I distinguish them from parameters learned from the data.
 
 **Q21. Why remove `id` from the research features?**  
-It is an administrative record identifier, not a biological measurement. I retained the course-template baseline separately and excluded `id` in the extended research.
+I recognize `id` as an administrative identifier, not a biological measurement. I retain it only in the instructor-compatible classroom baseline and exclude it from my separate research experiments.
 
 **Q22. What is a preprocessing pipeline?**  
-A sequence of transformations and an estimator fitted together. Inside cross-validation, each training fold fits its own preprocessing to prevent leakage into the evaluation fold.
+I use a preprocessing pipeline to fit transformations together with the classifier. During cross-validation, I keep each fold's preprocessing inside its training partition to prevent leakage.
 
 ### Evaluation and interpretation
 
 **Q23. What is accuracy?**  
-Correct predictions divided by all predictions. Classroom SVM achieved **108 / 109 = 99.08%**.
+I calculate accuracy as correct predictions divided by total predictions. My classroom SVM gets **108 / 109 = 99.08%**.
 
 **Q24. What is a confusion matrix?**  
-It counts correct and incorrect predictions for each actual class. With benign then malignant ordering, SVM's classroom matrix is `[[69, 0], [1, 39]]`.
+I read confusion matrices with actual classes as rows and predicted classes as columns. My classroom SVM matrix, ordered benign then malignant, is `[[69, 0], [1, 39]]`.
 
 **Q25. What is a false negative?**  
-A malignant observation predicted benign. Counts: **KNN 5, SVM 1, Decision Tree 4**.
+I count a false negative when a malignant sample is predicted benign. In my test split, KNN has **5**, SVM has **1**, and Decision Tree has **4**.
 
 **Q26. What is a false positive?**  
-A benign observation predicted malignant. Counts: **KNN 0, SVM 0, Decision Tree 4**.
+I count a false positive when a benign sample is predicted malignant. My test counts are **0 for KNN**, **0 for SVM**, and **4 for Decision Tree**.
 
 **Q27. What is malignant recall?**  
-`TP / (TP + FN)`. It measures the share of actual malignant observations correctly identified: **87.50%, 97.50%, and 90.00%**, respectively.
+I compute malignant recall as `TP / (TP + FN)`, the fraction of observed malignant samples found correctly. My results are **87.50% for KNN**, **97.50% for SVM** and **90.00% for Decision Tree**.
 
 **Q28. What is precision?**  
-`TP / (TP + FP)`: the share of observations predicted malignant that actually have a malignant label.
+I compute malignant precision as `TP / (TP + FP)`, the proportion of predicted malignant samples that really carry a malignant label.
 
 **Q29. What is F1-score?**  
-The harmonic mean of precision and recall. It summarizes their balance but does not replace an examination of individual errors.
+I use the F1-score, the harmonic mean of precision and recall, to summarize their balance. I still examine individual errors instead of relying on that score alone.
 
 **Q30. Which model performed best?**  
-SVM had the highest classroom test accuracy, the fewest missed malignant examples, and the highest mean nested accuracy in the separate research analysis.
+I select SVM as the strongest of my three classroom models because it has the highest held-out accuracy and the fewest missed malignant cases. It also has the highest mean nested accuracy in my separate research analysis.
 
 **Q31. Why not promise 99% accuracy?**  
-99.08% was measured on one specific, previously examined holdout. Performance on different data can be lower or higher.
+I report 99.08% only for the particular 109-case classroom test set that I already examined. I do not promise the same accuracy on different data or in clinical practice.
 
 **Q32. What is overfitting?**  
-A model learns sample-specific patterns that do not generalize. The classroom Decision Tree scored **100% on training data** but **92.66% on the test set**, a warning to investigate.
+I describe overfitting as learning patterns that do not generalize well. My classroom Decision Tree reaches **100% training accuracy** but **92.66% test accuracy**, so I investigate that gap.
 
 **Q33. What is cross-validation?**  
-It rotates training and validation folds on the development data to evaluate variation across partitions.
+I use cross-validation to rotate training and validation folds on development data and examine how results vary across partitions.
 
 **Q34. What is nested cross-validation?**  
-Inner folds select hyperparameters; separate outer folds evaluate that selection procedure. My research uses four outer folds.
+I use inner folds to select hyperparameters and outer folds to evaluate that selection process. My optional research analysis uses four outer folds.
 
 **Q35. Why are classroom and nested results different?**  
-They involve different partitions and model specifications. The nested research removes `id` and uses fold-contained preprocessing and tuning; the results are not interchangeable.
+I distinguish the experiments because they use different model specifications and partitions. In my research notebook I remove `id` and use fold-contained preprocessing and tuning, so I do not treat the nested and classroom scores as interchangeable.
 
 **Q36. What are the nested accuracy estimates?**  
-**KNN 95.40%, SVM 97.93%, Decision Tree 95.86%** on the 434-row development population under the recorded procedure.
+On my 434-row development partition, I obtain mean nested accuracies of **95.40% for KNN**, **97.93% for SVM**, and **95.86% for Decision Tree** under the recorded research procedure.
 
 ### Extensions, limitations and deployment
 
 **Q37. Which optional models did I examine?**  
-Logistic Regression and Random Forest, as separate exploratory comparisons, not replacements for the three required models.
+I examine Logistic Regression and Random Forest as optional research comparisons. I do not present them as replacements for the three models required by Professor Muturi.
 
 **Q38. Which additional transformations did I test?**  
-Robust scaling, Yeo–Johnson power transformation, PCA, and SelectKBest. I compared these within the research validation protocol.
+I test robust scaling, the Yeo–Johnson power transformation, PCA, and SelectKBest. I compare them within my separate research validation protocol.
 
 **Q39. Did every transformation improve the results?**  
-No. The Yeo–Johnson SVM experiment averaged **98.16%** nested accuracy, whereas the SelectKBest variant averaged approximately **94.47%**.
+No. In my research, the Yeo–Johnson SVM variant averages **98.16% nested accuracy**, while the SelectKBest variant averages approximately **94.47%**. I report both findings.
 
 **Q40. Why not select a model using the already examined holdout?**  
-Repeatedly choosing parameters according to the same holdout introduces selection bias and makes its score optimistic.
+I avoid repeated parameter selection using the already examined holdout because it would introduce selection bias and make the score look more optimistic.
 
 **Q41. Why are false negatives important?**  
-They represent missed malignant labels within this dataset. Their clinical consequences would require separate medical evidence and an approved decision process.
+I pay attention to false negatives because they are malignant observations predicted benign. I cannot infer the medical consequences of these errors without separate clinical evidence.
 
 **Q42. Can I claim this is a medical diagnostic device?**  
-No. It is an educational experiment without external clinical validation or approval for patient use.
+No. I present this project as an educational classification experiment, not a medical diagnostic device. I have not conducted external clinical validation or obtained approval for patient use.
 
 **Q43. How would I deploy the educational system?**  
-I would use a versioned notebook and read-only interactive visualization, preserve the preprocessing recipe, document the data source, and display limitations. No patient data or live medical decisions are involved.
+I would deploy an educational demonstration with a versioned notebook, a read-only interactive visualization, the documented preprocessing recipe and clearly stated limits. I would not use patient data or make live medical decisions.
 
 **Q44. What would clinical deployment require?**  
-Independent clinical cohorts, prospective validation, privacy protection, subgroup error assessment, clinical oversight, monitoring, and applicable regulatory review.
+Before any clinical use, I would require independent clinical cohorts, prospective validation, privacy safeguards, subgroup error analysis, clinical oversight, monitoring and applicable regulatory review.
 
 **Q45. How is the work reproducible?**  
-In my repository, I preserve the original CSV and its SHA-256 checksum, implementation settings, executed notebooks, results files, dependency specifications, and the distinction between classroom and research experiments.
+I make my work reproducible by preserving the original CSV and its SHA-256 checksum, my model settings, executed notebooks, result files, dependencies and the distinction between classroom and research evaluations.
 
 ## 7. Closing Statement
 
